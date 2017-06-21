@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Disney World Memory Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="js/MemoryGame.js" type="text/javascript"></script>
+    <script src="js/Card.js" type="text/javascript"></script>
+      <script src="jquery-2.2.3.js"></script>
+      <script src="jquery-3.1.1.js"></script>
+    <link href="css/MemoryGame.css" type="text/css" rel="stylesheet" />
+       <script src="JS/Score.js"></script>
+      
+      <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
+      <link rel="stylesheet" href="style.css">
+      <script src="loginJS.js"></script>
+  </head>
+  <body>
+      <div id="mainLogin" class="login-wrap">
+          <div class="login-html">
+              <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+              <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+              <div class="login-form">
+                  <div class="sign-in-htm">
+                      <div class="group">
+                          <label for="user" class="label">Email Address</label>
+                          <input id="user" type="text" class="input">
+                      </div>
+                      <div class="group">
+                          <label for="pass" class="label">Password</label>
+                          <input id="pass" type="password" class="input" data-type="password">
+                      </div>
+                      <div class="group">
+                          <input id="check" type="checkbox" class="check" checked>
+                          <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                      </div>
+                      <div class="group">
+                          <input type="submit" class="button" id="loginBtn" value="Sign In">
+                      </div>
+                      <div class="hr"></div>
+                      <div class="foot-lnk">
+                          <a href="#forgot">Forgot Password?</a>
+                      </div>
+                  </div>
+                  <div class="sign-up-htm">
+                      <div class="group">
+                          <label for="user" class="label">First Name</label>
+                          <input id="user" type="text" class="input userFirstName">
+                      </div>
+                      <div class="group">
+                          <label for="user" class="label">Last Name</label>
+                          <input id="user" type="text" class="input userLastName">
+                      </div>
+                      <div class="group">
+                          <label for="pass" class="label">Email Address</label>
+                          <input id="pass" type="text" class="input userEmail">
+                      </div>
+                      <div class="group">
+                          <label for="pass" class="label">Password</label>
+                          <input id="pass" type="password" class="input userPassword" data-type="password">
+                      </div>
+                      <div class="group">
+                          <input type="submit" class="button" id="registerBtn" value="Sign Up">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+      <div id="mainGame"></div>
+          <section id="memory--settings-modal" class="valign-table modal show" style="display:none;">
+              <div class="valign-cell">
+                  <form>
+                      <h2 class="memory--settings-label">Select A Difficulty Level:</h2>
+                      <select id="memory--settings-grid">
+                          <option value="2x2">Kids</option>
+                          <option value="2x3">practice - Easy</option>
+                          <option value="3x4">practice - Medium</option>
+                          <option value="5x6">score - Hard</option>
+                      </select>
+                      <input id="memory--settings-reset" class="startBtn" type="submit" value="Start New Game" />
+                  </form>
+              </div>
+              <table id="winnerTable">
+                  <tr>
+                      <th>Email</th>
+                      <th>Game Time</th>
+                      <th>Game Score</th>
+                  </tr>
+              </table>
+          </section>
+      <section id="memory--end-game-modal" class="valign-table modal" style="display:none;">
+          <div class="valign-cell">
+              <div class="wrapper">
+                  <h2 id="memory--end-game-message"></h2>
+                  <h3 id="memory--end-game-score"></h3>
+              </div>
+          </div>
+      </section>
+      <section id="memory--app-container" style="display:none;">
+          <ul id="memory--cards"></ul>
+      </section>
+      <section class="memory--menu-bar" style="display:none;">
+          <div class="inner">
+              <div class="left"><h1 class="memory--app-name">Disney World Memory Game</h1></div>
+                  <div class="right">
+                      <div id="LogOut"><label id="memory--settings-icon ">Logout</label></div>
+                      <a href="#settings"><label id="memory--settings-icon">New Game</label></a>
+                  </div>
+              <div class="timer" style="position:center;"><h1 style="padding-left:500px;"></h1></div>
+          </div>
+      </section>
+          <script src="js/BrowserInterface.js" type="text/javascript"></script>
+  </body>
+</html>
