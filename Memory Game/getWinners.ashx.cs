@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 
 namespace Memory_Game
@@ -24,6 +26,7 @@ namespace Memory_Game
             string str = theConnect.bestGames();
             context.Response.ContentType = "text/plain";
             context.Response.Write(str);
+
         }
 
         public bool IsReusable

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 
 namespace Memory_Game
@@ -15,19 +17,29 @@ namespace Memory_Game
 
         public void newUser(string firstName, string lastName, string email, string password)
         {
+            string encrypetPass;
+                using (SHA256 a = SHA256.Create())
+            {
+                encrypetPass = Convert.ToBase64String(Encoding.ASCII.GetBytes(password));
+            }
             _contextDB.Players.Add(new Player()
             {
                 FiratName = firstName,
                 LastName = lastName,
                 Email = email,
-                Password = password
+                Password = encrypetPass
             });
             _contextDB.SaveChanges();
         }
 
         public bool login(string email, string password)
         {
-            var list = _contextDB.Players.Where(x => x.Email == email && x.Password == password).ToList();
+            string encrypetPass;
+            using (SHA256 a = SHA256.Create())
+            {
+                encrypetPass = Convert.ToBase64String(Encoding.ASCII.GetBytes(password));
+            }
+            var list = _contextDB.Players.Where(x => x.Email == email && x.Password == encrypetPass).ToList();
             if (list.Count == 0)
                 return false;
             else
@@ -41,9 +53,9 @@ namespace Memory_Game
             var theTime = time.Split('.');
             _contextDB.Games.Add(new Game()
             {
-                GameScore = int.Parse(score) ,
+                GameScore = int.Parse(score),
                 GameTime = new TimeSpan(0, int.Parse(theTime[0]), int.Parse(theTime[1])),
-                PlayerID  = player.PlayerID
+                PlayerID = player.PlayerID
             });
             _contextDB.SaveChanges();
 
@@ -51,8 +63,14 @@ namespace Memory_Game
 
         public string bestGames()
         {
+            foreach (var item in _contextDB.Winners)
+            {
+                _contextDB.Winners.Remove(item);
+            }
+            _contextDB.SaveChanges();
+            
             string str = "";
-            List<Game> l = _contextDB.Games.OrderBy(x => x.GameTime).ToList();
+            List<Game> l = _contextDB.Games.OrderBy(x => x.GameTime).ThenBy(y => y.GameScore).ToList();
             List<Game> winners = new List<Game>();
             for (int i = 0; i < 5; i++)
             {
