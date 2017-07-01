@@ -15,7 +15,7 @@ window.scoreTime = {
     time: function () {
         $(".startBtn").click(function () {
             var level = $("#memory--settings-grid")[0].value;
-            if (level == "2x2") {
+            if (level == "5x6") {
                 var secs = 0;
                 var min = 0;
                 id = setInterval(function () {

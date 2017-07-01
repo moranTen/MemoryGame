@@ -70,9 +70,12 @@ namespace Memory_Game
             _contextDB.SaveChanges();
             
             string str = "";
-            List<Game> l = _contextDB.Games.OrderBy(x => x.GameTime).ThenBy(y => y.GameScore).ToList();
+            List<Game> l = _contextDB.Games.OrderBy(x => x.GameTime).ThenByDescending(y => y.GameScore).ToList();
             List<Game> winners = new List<Game>();
-            for (int i = 0; i < 5; i++)
+            var gamesNumber = _contextDB.Games.Count();
+            if (gamesNumber > 5)
+                gamesNumber = 5;
+            for (int i = 0; i < gamesNumber; i++)
             {
                 Game w = l.ElementAt(i);
                 _contextDB.Winners.Add(new Winner() {
